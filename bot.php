@@ -3,7 +3,7 @@
 #error_reporting(E_ALL);
 #ini_set('display_errors', 1);
 
-$TOKEN = "5311801017:AAEC9Z9gbl2IItHRi9x-amTjhMKvNV2zO-s"; # YOUR BOT TOKEN .
+$TOKEN = "1128799285:AAH634XjJOUgU1CfeMYK35uU0GJOkAypiL4"; # YOUR BOT TOKEN .
 
 if (!file_exists('Telegram.php')) {
     copy('https://mohammed-api.com/Telegram/library.php', 'Telegram.php');
