@@ -19,8 +19,8 @@ def trply_to_hi(bot, msg):
     if msg.text:
         chat_id = msg.chat.id
         msgid = bot.send_message(chat_id, f"جاري التحميل...")
-        api = requests.get(f"https://alsh-ax.ml/api/v3/dl/media.php?url={msg.text}").json()
-        bot.send_video(chat_id, api['data']['links'][0]['url'])
+        api = requests.get(f"https://lovetik.com/api/ajax/search?k={msg.text}").json()
+        bot.send_video(chat_id, api['links'][0]['a'], f"@alsh_3k - size {api['links'][0]['s']}")
         bot.delete_messages(chat_id, msgid.id)
 
 
