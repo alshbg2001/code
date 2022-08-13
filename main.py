@@ -17,11 +17,29 @@ def trply_to_hi(bot, msg):
 @bot.on_message(filters.text)
 def trply_to_hi(bot, msg):
     if msg.text:
+        BOTTOM = [
+            [
+                InlineKeyboardButton('mp3', callback_data=f"mp3#{msg.text}")
+            ],
+        ]
+        reply_markup = InlineKeyboardMarkup(BOTTOM)
         chat_id = msg.chat.id
         msgid = bot.send_message(chat_id, f"جاري التحميل...")
         api = requests.get(f"https://lovetik.com/api/ajax/search?k={msg.text}").json()
-        bot.send_video(chat_id, api['links'][0]['a'], f"@alsh_3k - size {api['links'][0]['s']}")
+        bot.send_video(chat_id, api['links'][0]['a'], f"@alsh_3k - size {api['links'][0]['s']}", reply_markup=reply_markup)
         bot.delete_messages(chat_id, msgid.id)
 
+@bot.on_callback_query()
+def trply_to_mp3(bot, CallbackQuery):
+    if CallbackQuery.data.split('#')[0] == "mp3":
+        chat_id = CallbackQuery.message.chat.id
+        bot.delete_messages(chat_id, CallbackQuery.message.id)
+        msgid = bot.send_message(chat_id, f"جاري التحميل...")
+        api = requests.get(f"https://lovetik.com/api/ajax/search?k={CallbackQuery.data.split('#')[1]}").json()
+        for i in api['links']:
+           # print(i['t'])
+            if "MP3" in i['t']:
+                bot.send_audio(chat_id, i['a'], f"@alsh_3k - {i['t']}", )
+                bot.delete_messages(chat_id, msgid.id)
 
 bot.run()
