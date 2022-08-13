@@ -16,7 +16,7 @@ def trply_to_hi(bot, msg):
 
 @bot.on_message(filters.text)
 def trply_to_hi(bot, msg):
-    if msg.text:
+    if "tiktok" in msg.text:
         BOTTOM = [
             [
                 InlineKeyboardButton('mp3', callback_data=f"mp3#{msg.text}")
